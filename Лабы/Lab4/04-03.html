@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Lab4</title>
+	<style type="text/css">
+		header {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			background: #FFD700;
+		}
+
+		h1 {
+			text-align: center;
+			color: #0000FF;
+		}
+
+		button {
+			border-radius: 7px;
+			font-size: 20px;
+			margin: 20px;
+			background-color: rgb(176,224,230);
+		}
+	</style>
+</head>
+<body>
+	<header>
+		<h1>Записная книга</h1>
+	</header>
+	<main>
+		<button onclick="Get()">Получить данные</button>
+
+		<fieldset>
+		  	<legend>Добавление</legend>
+		  	<form>
+				<label for="iName">Имя:</label>
+				<input type="text" id="iName"><br>
+				<label for="iBday">Дата рождения:</label>
+				<input type="text" id="iBday" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"><br>
+				<button onclick="Post()">Добавить данные</button>
+			</form>
+		</fieldset>
+		<fieldset>
+		  	<legend>Изменение</legend>
+		  	<form>
+				<label for="uId">ID:</label>
+				<input type="number" id="uId"><br>
+				<label for="uName">Имя:</label>
+				<input type="text" id="uName"><br>
+				<label for="uBday">Дата рождения:</label>
+				<input type="text" id="uBday" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"><br>
+				<button onclick="Put()">Изменить данные</button>
+			</form>
+		</fieldset>
+		<fieldset>
+		  	<legend>Удаление</legend>
+		  	<form>
+				<label for="dId">ID:</label>
+				<input type="number" id="dId"><br>
+				<button onclick="Delete()">Удалить данные</button>
+			</form>
+		</fieldset>
+		<div id="get"></div>
+	</main>
+</body>
+	<script type="text/javascript">
+        function Get() {
+            fetch('http://localhost:5000/api/db', {
+                method: 'GET',
+                headers: {'Content-Type':'application/json'}
+            })
+            .then(response => { return response.json(); })
+            .then(pdata => {
+                console.log('pdata', pdata);
+                let get = document.getElementById("get");
+                get.innerHTML = '';
+                pdata.forEach(element => {
+                	get.innerHTML += (element.id + '.  ' + element.name +
+                             ' ' + element.bday + '<br/>');
+                });
+            });
+        }
+
+        function Post() {
+            let Name = document.getElementById("iName");
+            let BDay = document.getElementById("iBday");
+
+            if (Name.value && BDay.value) {
+                fetch(`http://localhost:5000/api/db`, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(
+                        {
+                            name: Name.value,
+                            bday: BDay.value
+                        }
+                    )})
+                    .then(response => { return response.json(); })
+                    .then(pdata => {
+                        console.log('POST ', pdata);
+                    });
+            }
+            else {
+                let get = document.getElementById("get");
+                get.innerHTML = 'error';
+            }
+        }
+
+        function Put() {
+            let Name = document.getElementById("uName");
+            let BDay = document.getElementById("uBday");
+            let Id = document.getElementById('uId');
+
+            if (Name.value && BDay.value && Id.value) {
+                fetch(`http://localhost:5000/api/db`, {
+                    method: 'PUT',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(
+                        {
+                        	id: Id.value,
+                            name: Name.value,
+                            bday: BDay.value
+                        }
+                    )})
+                    .then(response => { return response.json(); })
+                    .then(pdata => {
+                        console.log('PUT.pdata', pdata);
+                    });
+            }
+            else {
+                let get = document.getElementById("get");
+                get.innerHTML = 'error';
+            }
+        }
+
+        function Delete() {
+            let Id = document.getElementById("dId");
+
+            if (Id.value) {
+                fetch(`http://localhost:5000/api/db?id=${Id.value}`, {
+                    method: 'DELETE'
+                })
+                .then(response => { return response.json(); })
+                .then(pdata => {
+                    console.log('DELETE.pdata', pdata);
+                });
+            }
+            else {
+                let get = document.getElementById("get");
+                get.innerHTML = 'error';
+            }
+        }
+    </script>
+</html>

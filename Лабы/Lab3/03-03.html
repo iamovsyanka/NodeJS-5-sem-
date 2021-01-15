@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Lab3</title>
+</head>
+<body>
+	<div id='result'></div>
+	<script type="text/javascript">
+		result.innerHTML = '';
+		let number = 0;
+		const time = Date.now();
+		for(var k=0; k < 21; k++) {
+	        fetch(`http://localhost:5000/fact?k=${k}`, {
+				method: 'GET', mode: 'no-cors',
+				headers: {
+					'Content-Type': 'application/json', 'Accept': 'application/json'
+				},
+				//!!!!!!!!!!!
+			}).then(async response => { return await response.json(); }).then((data) => {
+				result.innerHTML += (number++) + '. Результат: ' + (Date.now() - time) + '-' + data.k + '/' + data.fact + '<br>';
+			});
+		}
+	</script>
+</body>
+</html>

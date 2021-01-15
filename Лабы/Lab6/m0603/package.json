@@ -1,0 +1,17 @@
+{
+  "name": "qewwr",
+  "version": "1.0.0",
+  "description": "test",
+  "main": "m0603.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "ovsyanka",
+  "license": "ISC",
+  "dependencies": {
+    "nodemailer": "^6.4.17",
+    "nodemailer-smtp-transport": "^2.7.4"
+  },
+  "devDependencies": {},
+  "keywords": []
+}

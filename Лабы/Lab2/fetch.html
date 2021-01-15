@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Fetch</title>
+	<style type="text/css">
+		.text {
+			color: blue;
+		}
+	</style>
+</head>
+<body onload="init()">
+	<p id="name" class="text"></p>
+
+    <script>
+	    function init() {
+	    	/*Он также предоставляет глобальный метод fetch(),
+	    	который позволяет легко и логично получать ресурсы по сети асинхронно.
+
+			Подобная функциональность ранее достигалась с помощью XMLHttpRequest.
+			Fetch представляет собой лучшую альтернативу, которая может быть легко использована
+			другими технологиями, такими как Service Workers.
+			Fetch также обеспечивает единое логическое место для определения других связанных с HTTP понятий,
+			такие как CORS и расширения для HTTP.*/
+			fetch('http://localhost:5000/api/name', {
+				method: 'GET',
+				headers: { 	'Content-Type': 'text/plain; charset=utf-8'	},
+			}).then(async response => {
+				//response.text() – читает ответ и возвращает как обычный текст
+				document.getElementById('name').innerHTML = await response.text();
+			});
+	    }
+    </script>
+</body>
+</html>

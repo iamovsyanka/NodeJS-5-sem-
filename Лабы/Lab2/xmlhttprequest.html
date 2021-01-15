@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>XmlHttpRequest</title>
+    <style type="text/css">
+        .text {
+            color: green;
+        }
+    </style>
+</head>
+<body onload="init()">
+    <p id="name" class="text"></p>
+
+    <script>
+        function init() {
+            //!!!!!!!!
+            let request = new XMLHttpRequest();
+            //!!!!!!!!
+            request.open('GET', 'http://localhost:5000/api/name', true);
+            //!!!!!!!
+            request.onreadystatechange = () => {
+                /*
+                UNSENT = 0; // исходное состояние
+                OPENED = 1; // вызван метод open
+                HEADERS_RECEIVED = 2; // получены заголовки ответа
+                LOADING = 3; // ответ в процессе передачи (данные частично получены)
+                DONE = 4; // запрос завершён*/
+                if (request.readyState === 4) {
+                    if (request.status === 200) {
+                        //responseText - response
+                        console.log('OK. ' + request.responseText);
+                        document.getElementById('name').innerHTML = request.responseText;
+                    }
+                    else {
+                        console.log('nope.\n' + request.statusCode);
+                    }
+                }
+            };
+            //
+            request.send();
+        }
+    </script>
+</body>
+</html>
