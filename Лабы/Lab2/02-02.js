@@ -7,7 +7,7 @@ http.createServer(function (request, response) {
     const pngf = './2.png';
     let png = null;
     //Вызывают этот метод, передавая ему путь к файлу, и, после того,
-    // как Node.js получит необходимые сведения о файле, он вызовет коллбэк
+    //как Node.js получит необходимые сведения о файле, он вызовет коллбэк
     fs.statSync(pngf, (err, stat) => {
       if(err) {
         console.error('error', err);

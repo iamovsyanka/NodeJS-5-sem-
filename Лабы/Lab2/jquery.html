@@ -5,27 +5,21 @@
     <title>jquery</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <style type="text/css">
-        .text {
-            color: purple;
-        }
+        .text { color: purple; }
     </style>
 </head>
 <body>
     <p id="name" class="text"></p>
 
     <script>
-        //!!!!!!!!!
         $(document).ready(() => {
             const url = "http://localhost:5000/api/name";
             let settings = {
                 "async": true,
-                //!!
                 "crossDomain": true,
                 "url": url,
                 "method": "GET"
             };
-            //!!!!!!!!
-            //Promise
             $.ajax(settings).done(response => {
                 $("#name").text(response);
             });

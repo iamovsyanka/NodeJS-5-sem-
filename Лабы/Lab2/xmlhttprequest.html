@@ -14,11 +14,8 @@
 
     <script>
         function init() {
-            //!!!!!!!!
             let request = new XMLHttpRequest();
-            //!!!!!!!!
             request.open('GET', 'http://localhost:5000/api/name', true);
-            //!!!!!!!
             request.onreadystatechange = () => {
                 /*
                 UNSENT = 0; // исходное состояние
@@ -37,7 +34,6 @@
                     }
                 }
             };
-            //
             request.send();
         }
     </script>
