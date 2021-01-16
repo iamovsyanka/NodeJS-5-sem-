@@ -31,8 +31,6 @@ let http_handler = (request, response) => {
 let server = http.createServer();
 server.listen(5000, () => {
     console.log('Server running at http://localhost:5000/index.html')
-    })
-    .on('error', (e) => {
+    }).on('error', (e) => {
         console.log('Server running at http://localhost:5000/: error', e.code)
-    })
-    .on('request', http_handler);
+    }).on('request', http_handler);
