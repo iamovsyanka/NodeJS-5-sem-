@@ -58,7 +58,7 @@ module.exports = (request, response) => {
             });
         }
     }
-    else{
+    else {
         response.writeHead(404, {'Content-Type': 'application/json; charset=utf-8'});
         response.end(`error 404`);
     }
