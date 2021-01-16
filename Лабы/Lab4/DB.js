@@ -12,9 +12,9 @@ let dbData = [
 function DB() {
 	this.getIndex = () => { return dbData.length; };
     this.select = () => { return dbData; };
-    this.insert = (row) => { dbData.push(row); };
+    this.insert = row => { dbData.push(row); };
 
-    this.update = (row) => {
+    this.update = row => {
 		console.log(row.bday);
         let upIndex = dbData.findIndex(element => element.id === row.id);
         if (upIndex !== -1) {
@@ -25,7 +25,7 @@ function DB() {
 		}
     };
 
-    this.delete = (id) => {
+    this.delete = id => {
 		console.log(id);
 	    let delIndex = dbData.findIndex(element => element.id === id);
 		console.log(delIndex);
@@ -41,5 +41,4 @@ function DB() {
 //производный от EventEmitter объект приобретает функциональность,
 // позволяющую генерировать и прослушивать события
 util.inherits(DB, events.EventEmitter);
-//
 exports.DB = DB;

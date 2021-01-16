@@ -6,7 +6,6 @@ let db = new data.DB();
 
 db.on('GET', async (request, response) => {
 	console.log("GET");
-
     await response.end(JSON.stringify(await db.select()));
 });
 
