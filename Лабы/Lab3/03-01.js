@@ -6,7 +6,6 @@ http.createServer(function(request, response) {
 	response.end('<h1>' + state + '</h1>');
 }).listen(5000);
 
-//cmd
 process.stdin.setEncoding('utf8');
 process.stdout.write('Server running at http://localhost:5000/\n');
 process.stdout.write(state + '->');

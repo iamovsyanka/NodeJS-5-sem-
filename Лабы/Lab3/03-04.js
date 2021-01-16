@@ -2,7 +2,7 @@ const http = require('http');
 const fs = require('fs');
 const url = require('url');
 
-let fact = (n) => { return (n === 0 ? 1 : fact(n - 1) * n);};
+let fact = n => { return (n === 0 ? 1 : fact(n - 1) * n);};
 
 //инструкция по созданию объекта
 class Fact {
@@ -13,7 +13,6 @@ class Fact {
     }
 
     calc() {
-        //!!!!!!!!!111
         process.nextTick( () => {
             this.cb(null, this.ffact(this.num));
         });
@@ -27,7 +26,7 @@ http.createServer(function (request, response) {
             if (Number.isInteger(k)) {
                 response.writeHead(200, {'Content-Type' : 'application/json'});
                 let fact = new Fact(k, (error, result) => {
-                    response.end(JSON.stringify({ k:k , fact : result }));
+                    response.end(JSON.stringify({ k: k , fact: result }));
                 });
                 fact.calc();
             }

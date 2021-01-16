@@ -15,9 +15,9 @@
 	        fetch(`http://localhost:5000/fact?k=${k}`, {
 				method: 'GET', mode: 'no-cors',
 				headers: {
-					'Content-Type': 'application/json', 'Accept': 'application/json'
+					'Content-Type': 'application/json',
+					'Accept': 'application/json'
 				},
-				//!!!!!!!!!!!
 			}).then(async response => { return await response.json(); }).then((data) => {
 				result.innerHTML += (number++) + '. Результат: ' + (Date.now() - time) + '-' + data.k + '/' + data.fact + '<br>';
 			});
