@@ -88,7 +88,6 @@ process.stdin.on('readable', () => {
         let sec = Number(command.trim().replace(/[^\d]/g, ''));
         if(sec) {
             clearTimeout(timerSd);
-            //
             timerSd = setTimeout(() =>  server.close(), sec * 1000);
             timerSD = setTimeout(() => {
                 close();
@@ -104,7 +103,7 @@ process.stdin.on('readable', () => {
             console.log('Undo exit server');
         }
     }
-    else{
+    else {
         console.error("Server is not listening");
     }
  }
@@ -140,7 +139,7 @@ process.stdin.on('readable', () => {
               clearTimeout(timerSs);
               console.log('Undo commit');
           }
-      }
+    }
   }
 });
 
