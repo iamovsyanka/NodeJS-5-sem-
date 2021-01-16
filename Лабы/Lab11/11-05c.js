@@ -1,13 +1,10 @@
-const async = require('async')
-const rpcWSC = WebSocket =  require('rpc-websockets').Client
+const rpcWSC = WebSocket =  require('rpc-websockets').Client;
 let ws = new rpcWSC('ws://localhost:4000');
 
-ws.on('open', ()=>{
+ws.on('open', () => {
     ws.login({login: 'admin', password: 'admin'})
-        .then(async (login) =>{
-            await calc();
-        })
-})
+        .then(async (login) => { await calc() })
+});
 
 async function calc() {
     console.log('Result: ' + await ws.call('sum',

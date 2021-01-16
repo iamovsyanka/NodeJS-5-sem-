@@ -1,5 +1,5 @@
 const rpcWSC = require('rpc-websockets').Client;
-const readline = require('readline');
+const readline = require('readlxine');
 
 let ws = new rpcWSC('ws://localhost:4000/');
 
