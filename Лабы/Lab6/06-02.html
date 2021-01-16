@@ -24,8 +24,12 @@
 		function Send() {
 			fetch('http://localhost:3000/', {
 				method: 'POST', mode: 'no-cors',
-				headers: {'Content-Type':'application/json', 'Accept':'text/html'},
-				body: JSON.stringify({from: sender.value, to: receiver.value, message: message.value})
+				headers: {	'Content-Type':'application/json',
+							'Accept':'text/html'
+				},
+				body: JSON.stringify({from: sender.value,
+					to: receiver.value,
+					message: message.value})
 			}).then(response => response.text()).then(pdata => alert(pdata));
 		}
 	</script>
