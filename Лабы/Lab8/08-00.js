@@ -1,7 +1,7 @@
-let http = require('http');
-let url = require('url');
-let fs = require('fs');
-let mp = require('multiparty');
+const http = require('http');
+const url = require('url');
+const fs = require('fs');
+const mp = require('multiparty');
 const parseString = require('xml2js').parseString;
 const xmlbuilder = require('xmlbuilder');
 
@@ -39,7 +39,6 @@ let http_handler = (req, res) => {
         }
     }
 
-
     if(RegExp(/^\/parameter\/[0-9]{1,100}\/[0-9]{1,100}/).test(url.parse(req.url).pathname)) {
         res.writeHead(200, {'Content-Type':'text/html; charset=utf-8'});
         var p = url.parse(req.url, true);
@@ -60,7 +59,6 @@ let http_handler = (req, res) => {
         res.writeHead(200, {'Content-Type':'text/html; charset=utf-8'});
         res.end(res.address + req.url);
     }
-
 
     if(url.parse(req.url).pathname === '/close') {
         res.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'});
@@ -88,7 +86,6 @@ let http_handler = (req, res) => {
         });
         res.end('1');
     }
-
 
     if(url.parse(req.url).pathname === '/resp-status') {
         if((x = +url.parse(req.url, true).query.code) && (y = url.parse(req.url, true).query.mess))  {
@@ -189,13 +186,13 @@ let http_handler = (req, res) => {
         }
     }
 };
-let conn =0;
-server.on('connection', (socket) => {
+
+let conn = 0;
+server.on('connection', socket => {
     console.log(conn++);
     clientSocket.localAddress = socket.localAddress;
     clientSocket.localPort = socket.localPort;
 });
 
 server.on('request', http_handler);
-
 server.listen(5000);
