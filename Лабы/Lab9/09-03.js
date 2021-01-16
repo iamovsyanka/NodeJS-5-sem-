@@ -1,6 +1,6 @@
-let http = require('http');
-let query = require('querystring');
-let url = require('url');
+const http = require('http');
+const query = require('querystring');
+const url = require('url');
 
 http.createServer(function(request, response) {
     let parsedQuery = url.parse(request.url, true).query;

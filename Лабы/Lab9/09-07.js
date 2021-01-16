@@ -1,5 +1,5 @@
-let http = require('http');
-let fs = require('fs');
+const http = require('http');
+const fs = require('fs');
 
 http.createServer(function(request, response) {
     response.writeHead(200, {'Content-Type': 'text/plain; charset=utf-8'});
@@ -28,7 +28,6 @@ let options = {
 };
 
 let req = http.request(options, (res) => {
-
     let responseData = '';
     res.on('data', (chunk) => {
         responseData += chunk;
@@ -43,7 +42,6 @@ let stream = new fs.ReadStream('pigeon.png');
 stream.on('data', (chunk) => {
     req.write(chunk);
     console.log(Buffer.byteLength(chunk));
-});
-stream.on('end', () => {
+}).on('end', () => {
     req.end(`\r\n--${bound}--\r\n`);
 });

@@ -1,18 +1,17 @@
-let http = require('http');
-let fs = require('fs');
+const http = require('http');
+const fs = require('fs');
 
 http.createServer(function(request, response) {
     response.writeHead(200, {'Content-Type': 'text/plain; charset=utf-8'});
     let txt = '';
     request.on('data', (chunk) => {
         txt += chunk.toString();
-    response.end(txt);
-});
+        response.end(txt);
+    });
 }).listen(8080);
 
 let bound = '-------------573cf973d5228';
 let body = `--${bound}\r\n`;
-//!!!!1
     body += 'Content-Disposition: form-data; name="file"; filename="MyFile.txt"\r\n';
     body += 'Content-Type: text/plain\r\n\r\n';
     body += fs.readFileSync('MyFile.txt');

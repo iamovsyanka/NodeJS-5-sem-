@@ -1,4 +1,4 @@
-let http = require('http');
+const http = require('http');
 const parseString = require('xml2js').parseString;
 const xmlbuilder = require('xmlbuilder');
 
@@ -20,15 +20,11 @@ http.createServer(function(req, res) {
             let xmlDoc = xmlbuilder.create('response').att('id', '33');
             xmlDoc.ele('result').att('value', xSum.toString()).up()
                   .ele('concat').att('value', mSum.toString()).up();
-            //xmlDoc.ele('sum').att('element', 'x').att('result', xSum).up().ele('concat').att('element', 'm').att('result', mSum);
-
-            //
             res.end(xmlDoc.toString({ pretty: true }));
         });
     });
 }).listen(8080);
 
-//
 let parameters = xmlbuilder.create('request').att('id', '28');
 parameters.ele('x').att('value', '1').up()
           .ele('x').att('value', '2').up()
@@ -55,7 +51,6 @@ let req = http.request(options, (res) => {
     });
     res.on('end', () => {
         console.log('body=', responseData);
-        //
             parseString(responseData, (err, str) => {
                 if(err) {
                  console.log('xml parser error');

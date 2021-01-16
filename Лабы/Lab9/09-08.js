@@ -1,5 +1,5 @@
-let http = require('http');
-let fs = require('fs');
+const http = require('http');
+const fs = require('fs');
 
 http.createServer(function(request, response) {
     response.writeHead(200, {'Content-Type': 'text/plain; charset=utf-8'});
@@ -9,7 +9,6 @@ http.createServer(function(request, response) {
     });
 
     readableStream.pipe(response);
-
 }).listen(8080);
 
 let writeableStream = fs.createWriteStream('MyFile2.txt');
